@@ -116,14 +116,14 @@ export const isValidPassword = (password: string): {
   if (password.length < 8) {
     errors.push('Password must be at least 8 characters long');
   }
-  if (!/[A-Z]/.test(password)) {
-    errors.push('Password must contain at least one uppercase letter');
-  }
-  if (!/[a-z]/.test(password)) {
-    errors.push('Password must contain at least one lowercase letter');
-  }
-  if (!/[0-9]/.test(password)) {
-    errors.push('Password must contain at least one number');
+  
+  // Make it simpler - just need uppercase, lowercase, and number
+  const hasUpperCase = /[A-Z]/.test(password);
+  const hasLowerCase = /[a-z]/.test(password);
+  const hasNumber = /[0-9]/.test(password);
+
+  if (!hasUpperCase || !hasLowerCase || !hasNumber) {
+    errors.push('Password must contain uppercase, lowercase, and number');
   }
 
   return {

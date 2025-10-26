@@ -52,3 +52,15 @@ export const getQuestionsByIds = async (ids: string[]): Promise<Question[]> => {
 
   return result.rows;
 };
+export const getQuestionStats = async (questionId: string) => {
+  const result = await query(`
+    SELECT 
+      COUNT(*) as total_attempts,
+      SUM(CASE WHEN is_correct THEN 1 ELSE 0 END) as correct_count,
+      ROUND(AVG(CASE WHEN is_correct THEN 100 ELSE 0 END), 2) as success_rate
+    FROM user_answers
+    WHERE question_id = $1
+  `, [questionId]);
+
+  return result.rows[0];
+};

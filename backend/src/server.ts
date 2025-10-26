@@ -6,6 +6,7 @@ import { seedDatabase } from './utils/seedData';
 import authRoutes from './routes/authRoutes';
 import topicRoutes from './routes/topicRoutes';
 import quizRoutes from './routes/quizRoutes';
+import leaderboardRoutes from './routes/leaderboardRoutes';
 
 // Load environment variables FIRST
 dotenv.config();
@@ -64,6 +65,7 @@ app.get('/', (req: Request, res: Response) => {
 app.use('/api/auth', authRoutes);
 app.use('/api/topics', topicRoutes);
 app.use('/api/quiz', quizRoutes);
+app.use('/api/leaderboard', leaderboardRoutes);
 
 
 // 404 Handler
